@@ -1,0 +1,32 @@
+{
+  "name": "bike-rentals-s3-sink",
+  "config": {
+    "connector.class": "io.confluent.connect.s3.S3SinkConnector",
+    "tasks.max": "1",
+
+    "topics": "bike-rentals-topic",
+
+    "s3.region": "us-east-2",
+    "s3.bucket.name": "final-project-sl-us-east-2",
+    "s3.part.size": "5242880",
+
+    "format.class": "io.confluent.connect.s3.format.json.JsonFormat",
+    "storage.class": "io.confluent.connect.s3.storage.S3Storage",
+
+    "partitioner.class": "io.confluent.connect.storage.partitioner.TimeBasedPartitioner",
+    "path.format": "YYYY/MM/DD",
+    "locale": "en_US",
+    "timezone": "UTC",
+    "partition.duration.ms": "86400000",
+    "timestamp.extractor": "Wallclock",
+
+    "topics.dir": "bike_rentals",
+
+    "flush.size": "1000",
+    "rotate.interval.ms": "60000",
+
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+  }
+}
